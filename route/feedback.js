@@ -3,9 +3,13 @@ const router = express.Router();
 
 module.exports = (params) => {
   const { feedbackService } = params;
-  router.get('/', (req, res) => {
-    const feedback = feedbackService.getList();
-    return res.json(feedback);
+  router.get('/', (req, res, next) => {
+    try {
+      const feedback = feedbackService.getList();
+      return res.json(feedback);
+    } catch (error) {
+      return next(error);
+    }
   });
   router.post('/', (req, res) => {
     return res.send(`Feedback form poster`);
