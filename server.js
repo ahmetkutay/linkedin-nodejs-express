@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const cookieSession = require('cookie-session');
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
 const routes = require('./route');
 
 const PORT = 8000;
@@ -20,6 +21,8 @@ app.use(
     keys: ['asdasdadasd', 'zxczxczxczxc'],
   })
 );
+
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
 app.locals.siteName = 'Roux Meetup';
